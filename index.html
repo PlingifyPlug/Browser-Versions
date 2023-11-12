@@ -6,6 +6,22 @@
     <title>PlingifyPlug-Browser-Versions</title>
 </head>
 <body>
+
+    <div id="blackoutScreen" class="blackout">
+        <video autoplay loop muted class="video-background">
+            <source src="BlackoutVideoBackground.mp4" type="video/mp4">
+            <!-- Include additional source elements for other video formats if needed -->
+        </video>
+        <div class="blackout-content">
+            <h2>Server downtime.</h2>
+            
+            <div id="customNotification" class="custom-notification-box">Server Downtime</div>
+      <p>Please check the <a href="https://plingifyplug.github.io/Status/">status page</a> to check webpage status & reason</p>
+            <p">Countdown Timer: <span id="countdown"></span></p>
+        </div>
+      </div>
+
+
   <div class="popup-container">
     <div class="popup-box">
         <p>Please remember to never share your <b>personal information, passwords, address, bank details, emails or phone numbers</b> on this site unless a staff member requires it in the Tidio Live Chat Panel</p>
@@ -43,6 +59,37 @@
     </div></div>
 </body>
 <style>
+.blackout {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            color: white;
+            background-color: #000;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blackout-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+
 .popup-container {
     display: flex;
     justify-content: center;
@@ -236,5 +283,119 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
     }, 3000); // 3,000 milliseconds = 3 seconds
 });
 
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Select the popup container
+    const popupContainer = document.querySelector(".popup-container");
+
+    // Show the popup when the page loads
+    popupContainer.style.display = "block";
+
+    // Add a delay of 3 seconds before starting the fade-out animation
+    setTimeout(function() {
+        // Set the opacity to 0 for a fade-out effect
+        popupContainer.style.opacity = "0";
+        
+        // Hide the popup after the animation completes (0.3 seconds)
+        setTimeout(function() {
+            popupContainer.style.display = "none";
+        }, 300);
+    }, 3000); // 3,000 milliseconds = 3 seconds
+});
+
+      // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  </SCRIPT>
+
+<script>
+        var blackoutScreen = document.getElementById('blackoutScreen');
+        var countdownElement = document.getElementById('countdown');
+        var currentTime = new Date();
+        var startTime = new Date();
+        var endTime = new Date();
+
+        startTime.setUTCHours(0, 0, 1); // Set the start time to 10 PM GMT
+        endTime.setUTCHours(23, 0, 59); // Set the end time to 5 AM GMT
+
+        function updateBlackout() {
+            currentTime = new Date();
+
+            if (currentTime.getTime() >= startTime.getTime() || currentTime.getTime() < endTime.getTime()) {
+                blackoutScreen.style.display = 'flex';
+                updateCountdown();
+            } else {
+                blackoutScreen.style.display = 'none';
+            }
+        }
+
+        function updateCountdown() {
+            currentTime = new Date();
+
+            if (currentTime.getTime() < endTime.getTime()) {
+                var timeDiff = endTime.getTime() - currentTime.getTime();
+                var hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                countdownElement.textContent = hours.toString().padStart(2, '0') + "h " +
+                    minutes.toString().padStart(2, '0') + "m " +
+                    seconds.toString().padStart(2, '0') + "s";
+
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        updateBlackout();
+
+
+      // Get the current time
+    var now = new Date();
+    
+    // Calculate the time until 22:00
+    var refreshTime = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      22, // 22:00 hours
+      0, // 0 minutes
+      0 // 0 seconds
+    ) - now;
+
+    // If the time is negative, add 24 hours to it
+    if (refreshTime < 0) {
+      refreshTime += 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    }
+
+    // Set the timeout to refresh the page
+    setTimeout(function() {
+      window.location.reload(true);
+    }, refreshTime);
+
+
+        // Get the current time
+    var now = new Date();
+    
+    // Calculate the time until 22:00
+    var refreshTime = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      5, // 05:00 hours
+      0, // 0 minutes
+      0 // 0 seconds
+    ) - now;
+
+    // If the time is negative, add 24 hours to it
+    if (refreshTime < 0) {
+      refreshTime += 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    }
+
+    // Set the timeout to refresh the page
+    setTimeout(function() {
+      window.location.reload(true);
+    }, refreshTime);
     </SCRIPT>
 </html>
