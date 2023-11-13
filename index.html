@@ -14,7 +14,7 @@
         </video>
         <div class="blackout-content">
             <h2>Server downtime.</h2>
-            
+        
             <div id="customNotification" class="custom-notification-box">Server Downtime</div>
       <p>Please check the <a href="https://plingifyplug.github.io/Status/">status page</a> to check webpage status & reason</p>
             <p">Countdown Timer: <span id="countdown"></span></p>
@@ -126,25 +126,25 @@
 }
 
     a:link {
-  color: rgb(0, 0, 0);
+  color: #fff;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgb(0, 0, 0);
+  color: #fff;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(0, 0, 0);
+  color: #fff;
   background-color: transparent;
   text-decoration: underline;
 }
 
 a:active {
-  color: rgb(0, 0, 0);
+  color: #fff;
   background-color: transparent;
   text-decoration:underline ;
 }
@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var endTime = new Date();
 
         startTime.setUTCHours(0, 0, 1); // Set the start time to 10 PM GMT
-        endTime.setUTCHours(23, 0, 59); // Set the end time to 5 AM GMT
+        endTime.setUTCHours(16, 15, 0); // Set the end time to 5 AM GMT
 
         function updateBlackout() {
             currentTime = new Date();
